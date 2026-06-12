@@ -15,7 +15,7 @@ webbläsarens localStorage och seedas med ett svenskt demodataset. Knappen
 | **Översikt** | KPI:er: öppna/försenade ordrar, beläggning, väntande inköp, lågt lagersaldo |
 | **Ordrar** | Kundordrar med statusflöde Offert → Bekräftad → I produktion → Klar → Levererad, materialbehovskontroll |
 | **Beläggning** | Gantt-vy per maskin med automatisk schemaläggning (finit kapacitet, EDD-prioritet), manuell flytt/maskinbyte, konflikt- och förseningsmarkering |
-| **Artiklar** | Artikelregister med beredning (operationer: ställtid + stycktid per maskin) och material (BOM) |
+| **Artiklar** | Artikelregister med beredning (operationer: ställtid + stycktid per maskin), material (BOM), **3D-visare** och **genererade ritningar** |
 | **Lager** | Materialsaldon, beställningspunkter, inkommande kvantiteter |
 | **Inköp** | Inköpsordrar till leverantörer; mottagning räknar upp lagersaldot |
 | **Maskiner / Kunder / Leverantörer** | Grundregister |
@@ -31,6 +31,11 @@ webbläsarens localStorage och seedas med ett svenskt demodataset. Knappen
 5. Klicka på en stapel i Gantt-vyn — flytta den ±1 h/±1 dag eller byt maskin.
    Operationen låses och övriga schemaläggs om runt den.
 6. Markera ordern som Klar → Levererad.
+7. Öppna en **artikel** — fliken *3D-modell* visar detaljen i en roterbar 3D-vy
+   (parametrisk modell: axel/platta/bussning, eller uppladdad STL) och fliken
+   *Ritning* visar en automatiskt genererad måttsatt ritning (A4 med ritningshuvud).
+   Egna ritningsbilder kan laddas upp per artikel. Knappen **⬡ 3D** på en
+   orderrad visar direkt vad som ska tillverkas.
 
 ## Kom igång lokalt
 
@@ -54,7 +59,9 @@ Appen använder hash-routing (`#/planering` osv.) så inga 404-omskrivningar beh
 ## Teknik
 
 React 18 + Vite + TypeScript · Zustand (state + localStorage-persistens) ·
-react-router-dom (HashRouter) · egen Gantt-rendering i CSS · inga övriga beroenden.
+react-router-dom (HashRouter) · egen Gantt-rendering i CSS · Three.js för
+3D-visning (parametriska modeller + STL) · genererade SVG-ritningar.
+Responsiv layout — sidomenyn blir toppmeny på mobil.
 
 Domänmodellen är inspirerad av Monitor ERP, ProShop, Fulcrum, Odoo MRP och ERPNext:
 beredning per artikel (operationsnummer, maskintyp, ställtid, stycktid), framåtriktad

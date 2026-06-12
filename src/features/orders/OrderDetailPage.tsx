@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '../../store/useStore';
+import Modal from '../../components/Modal';
+import Viewer3D from '../../components/Viewer3D';
 import { materialRequirements } from '../../store/selectors';
 import { fmtDate, fmtDateTime, fmtNumber, fmtSEK, addDays, toISODate } from '../../lib/time';
 import { ORDER_STATUS_FLOW, ORDER_STATUS_LABELS } from '../../types';
@@ -21,6 +24,7 @@ export default function OrderDetailPage() {
   const updateOrder = useStore((s) => s.updateOrder);
   const deleteOrder = useStore((s) => s.deleteOrder);
   const createPurchaseOrder = useStore((s) => s.createPurchaseOrder);
+  const [view3dArticleId, setView3dArticleId] = useState<string | null>(null);
 
   if (!order) {
     return <div className="empty-state">Ordern hittades inte. <Link to="/ordrar">Till orderlistan</Link></div>;
@@ -135,6 +139,15 @@ export default function OrderDetailPage() {
                 <tr key={line.id}>
                   <td>
                     {article ? <Link to={`/artiklar/${article.id}`}>{article.number} · {article.name}</Link> : '–'}
+                    {article && (article.model || article.stlData) && (
+                      <button
+                        className="btn btn-sm" style={{ marginLeft: 8 }}
+                        title="Visa 3D-modell"
+                        onClick={() => setView3dArticleId(article.id)}
+                      >
+                        ⬡ 3D
+                      </button>
+                    )}
                   </td>
                   <td className="num">
                     {editable ? (
@@ -251,6 +264,24 @@ export default function OrderDetailPage() {
           </div>
         </>
       )}
+
+      {view3dArticleId && (() => {
+        const article = articleById.get(view3dArticleId);
+        if (!article) return null;
+        const materialName = article.bom[0]
+          ? materials.find((m) => m.id === article.bom[0].materialId)?.name
+          : undefined;
+        return (
+          <Modal title={`${article.number} · ${article.name}`} onClose={() => setView3dArticleId(null)}>
+            <Viewer3D model={article.model} stlData={article.stlData} materialName={materialName} height={320} />
+            <div className="small mt">
+              <Link to={`/artiklar/${article.id}`} onClick={() => setView3dArticleId(null)}>
+                Öppna artikeln (ritning & beredning) →
+              </Link>
+            </div>
+          </Modal>
+        );
+      })()}
     </div>
   );
 }

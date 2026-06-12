@@ -4,4 +4,11 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: '/test1/',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: { three: ['three'] },
+      },
+    },
+  },
 });

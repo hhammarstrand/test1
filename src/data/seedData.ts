@@ -74,6 +74,11 @@ export function createSeedData(): SeedData {
         { id: 'rs-1001-40', operationNo: 40, description: 'Kontrollmätning', machineType: 'kontroll', defaultMachineId: 'machine-kontroll', setupTimeMin: 10, cycleTimeMin: 3 },
       ],
       bom: [{ materialId: 'mat-1010', qtyPerUnit: 0.3 }],
+      model: {
+        kind: 'shaft',
+        segments: [{ diameter: 40, length: 190 }, { diameter: 32, length: 60 }],
+        keyway: { segmentIndex: 0, width: 10, length: 70, offset: 30 },
+      },
     },
     {
       id: 'art-1002', number: 'A-1002', name: 'Hydraulkolv Ø75', description: 'Kolv till hydraulcylinder, rostfri', price: 2400,
@@ -83,6 +88,14 @@ export function createSeedData(): SeedData {
         { id: 'rs-1002-30', operationNo: 30, description: 'Kontrollmätning', machineType: 'kontroll', defaultMachineId: 'machine-kontroll', setupTimeMin: 10, cycleTimeMin: 5 },
       ],
       bom: [{ materialId: 'mat-1020', qtyPerUnit: 0.4 }],
+      model: {
+        kind: 'shaft',
+        segments: [
+          { diameter: 75, length: 140 },
+          { diameter: 60, length: 60 },
+          { diameter: 48, length: 30 },
+        ],
+      },
     },
     {
       id: 'art-2001', number: 'A-2001', name: 'Fästplatta 100x80', description: 'Maskinfäste med 6 hål, S235', price: 320,
@@ -91,6 +104,16 @@ export function createSeedData(): SeedData {
         { id: 'rs-2001-20', operationNo: 20, description: 'Borrning hålbild', machineType: 'borr', defaultMachineId: 'machine-borr-1', setupTimeMin: 15, cycleTimeMin: 4 },
       ],
       bom: [{ materialId: 'mat-2020', qtyPerUnit: 0.12 }],
+      model: {
+        kind: 'plate',
+        width: 100,
+        depth: 80,
+        thickness: 10,
+        holes: [
+          { x: -38, y: -28, diameter: 9 }, { x: 0, y: -28, diameter: 9 }, { x: 38, y: -28, diameter: 9 },
+          { x: -38, y: 28, diameter: 9 }, { x: 0, y: 28, diameter: 9 }, { x: 38, y: 28, diameter: 9 },
+        ],
+      },
     },
     {
       id: 'art-3001', number: 'A-3001', name: 'Ventilhus aluminium', description: 'Fräst ventilhus EN AW-6082', price: 1850,
@@ -101,6 +124,17 @@ export function createSeedData(): SeedData {
         { id: 'rs-3001-40', operationNo: 40, description: 'Kontrollmätning', machineType: 'kontroll', defaultMachineId: 'machine-kontroll', setupTimeMin: 15, cycleTimeMin: 6 },
       ],
       bom: [{ materialId: 'mat-3010', qtyPerUnit: 1 }],
+      model: {
+        kind: 'plate',
+        width: 110,
+        depth: 110,
+        thickness: 40,
+        holes: [
+          { x: 0, y: 0, diameter: 32 },
+          { x: -44, y: -44, diameter: 9 }, { x: 44, y: -44, diameter: 9 },
+          { x: -44, y: 44, diameter: 9 }, { x: 44, y: 44, diameter: 9 },
+        ],
+      },
     },
     {
       id: 'art-4001', number: 'A-4001', name: 'Bussning mässing Ø25x40', description: 'Glidbussning CW614N', price: 145,
@@ -108,6 +142,7 @@ export function createSeedData(): SeedData {
         { id: 'rs-4001-10', operationNo: 10, description: 'Svarvning komplett', machineType: 'svarv', defaultMachineId: 'machine-svarv-2', setupTimeMin: 25, cycleTimeMin: 5 },
       ],
       bom: [{ materialId: 'mat-4010', qtyPerUnit: 0.05 }],
+      model: { kind: 'tube', outerDiameter: 25, innerDiameter: 16, length: 40 },
     },
     {
       id: 'art-5001', number: 'A-5001', name: 'Distansplatta 60x60', description: 'Distans i aluminium, 20 mm', price: 210,
@@ -116,6 +151,16 @@ export function createSeedData(): SeedData {
         { id: 'rs-5001-20', operationNo: 20, description: 'Borrning', machineType: 'borr', defaultMachineId: 'machine-borr-1', setupTimeMin: 10, cycleTimeMin: 3 },
       ],
       bom: [{ materialId: 'mat-3020', qtyPerUnit: 0.55 }],
+      model: {
+        kind: 'plate',
+        width: 60,
+        depth: 60,
+        thickness: 20,
+        holes: [
+          { x: -22, y: -22, diameter: 6.6 }, { x: 22, y: -22, diameter: 6.6 },
+          { x: -22, y: 22, diameter: 6.6 }, { x: 22, y: 22, diameter: 6.6 },
+        ],
+      },
     },
   ];
 

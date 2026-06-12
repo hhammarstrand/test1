@@ -3,6 +3,7 @@ import { useStore } from '../../store/useStore';
 import { fmtMinutes } from '../../lib/time';
 import RoutingEditor from './RoutingEditor';
 import BomEditor from './BomEditor';
+import PartViewSection from './PartViewSection';
 
 export default function ArticleDetailPage() {
   const { id } = useParams();
@@ -67,6 +68,7 @@ export default function ArticleDetailPage() {
         </div>
       </div>
 
+      <PartViewSection article={article} />
       <RoutingEditor article={article} />
       <BomEditor article={article} />
     </div>

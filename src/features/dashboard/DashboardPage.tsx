@@ -8,6 +8,7 @@ import { OrderStatusBadge } from '../../components/StatusBadge';
 
 export default function DashboardPage() {
   const orders = useStore((s) => s.orders);
+  const resetDemoData = useStore((s) => s.resetDemoData);
   const ops = useStore((s) => s.plannedOperations);
   const machines = useStore((s) => s.machines);
   const materials = useStore((s) => s.materials);
@@ -39,6 +40,16 @@ export default function DashboardPage() {
           <h1>Översikt</h1>
           <p>Läget i verkstaden just nu</p>
         </div>
+        <button
+          className="btn btn-sm"
+          onClick={() => {
+            if (confirm('Återställ all data till demodata? Dina ändringar försvinner.')) {
+              resetDemoData();
+            }
+          }}
+        >
+          ↺ Återställ demodata
+        </button>
       </div>
 
       <div className="kpi-grid">

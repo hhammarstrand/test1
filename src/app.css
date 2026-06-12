@@ -324,3 +324,88 @@ input:focus, select:focus, textarea:focus { outline: 2px solid #bcd5ef; border-c
 .util-bar-fill { height: 100%; border-radius: 99px; background: var(--primary); }
 .util-bar-fill.high { background: var(--amber); }
 .util-bar-fill.over { background: var(--red); }
+
+/* ---------- 3D-visare & ritningar ---------- */
+.viewer3d {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  touch-action: none;
+}
+.viewer3d canvas { display: block; width: 100% !important; }
+
+.tabs { display: flex; gap: 0.25rem; margin-bottom: 0.75rem; border-bottom: 2px solid var(--border); }
+.tab {
+  border: none;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+.drawing-sheet {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.drawing-files {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+.drawing-file {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+.drawing-file img { width: 100%; display: block; }
+.drawing-file figcaption { padding: 0.4rem 0.6rem; border-top: 1px solid var(--border); }
+
+/* ---------- Mobil ---------- */
+@media (max-width: 820px) {
+  .layout { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    flex-direction: column;
+  }
+  .sidebar-brand { padding: 0.6rem 1rem; border-bottom: none; }
+  .brand-icon { font-size: 1.2rem; }
+  .sidebar nav {
+    display: flex;
+    overflow-x: auto;
+    padding: 0 0.5rem 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .sidebar nav::-webkit-scrollbar { display: none; }
+  .nav-link { white-space: nowrap; padding: 0.4rem 0.7rem; margin-bottom: 0; flex-shrink: 0; }
+  .sidebar-footer { display: none; }
+  .content { padding: 1rem 0.9rem 2.5rem; }
+  h1 { font-size: 1.25rem; }
+  .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; }
+  .kpi-value { font-size: 1.5rem; }
+  .card { padding: 0.8rem 0.9rem; }
+  .table { font-size: 0.82rem; }
+  .table th, .table td { padding: 0.45rem 0.5rem; }
+  .modal-backdrop { padding: 2vh 0.5rem; }
+  .modal { padding: 1rem; max-height: 92vh; }
+  .gantt-machine-col { width: 130px; padding: 0.4rem 0.5rem; }
+  .gantt-machine-name { font-size: 0.74rem; }
+  .gantt-inner { min-width: 700px; }
+}
