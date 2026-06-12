@@ -273,6 +273,22 @@ export const useStore = create<AppState>()(
 
       resetDemoData: () => set({ ...createSeedData() }),
     }),
-    { name: 'verkstad-poc-v1', version: 1 },
+    {
+      name: 'verkstad-poc-v1',
+      version: 2,
+      // v1→v2: artiklar fick 3D-modell — fyll på befintlig lagrad data
+      // med seed-modellerna för matchande artikel-id:n.
+      migrate: (persisted: unknown, version: number) => {
+        const state = persisted as Partial<AppState>;
+        if (version < 2 && state.articles) {
+          const seedModels = new Map(createSeedData().articles.map((a) => [a.id, a.model]));
+          state.articles = state.articles.map((a) => ({
+            ...a,
+            model: a.model ?? seedModels.get(a.id),
+          }));
+        }
+        return state as AppState;
+      },
+    },
   ),
 );

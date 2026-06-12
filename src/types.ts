@@ -1,6 +1,8 @@
 // Datamodell för verkstadssystemet. Terminologi enligt svensk verkstadspraxis
 // (Monitor ERP-stil): beredning, ställtid, stycktid, beläggning, beställningspunkt.
 
+import type { PartModel } from './lib/partModel';
+
 // ---------- Grunddata ----------
 
 export interface Customer {
@@ -61,6 +63,12 @@ export interface BomLine {
   qtyPerUnit: number;
 }
 
+export interface DrawingFile {
+  id: string;
+  name: string;
+  dataUrl: string; // bild (png/jpg) som data-URL i localStorage
+}
+
 export interface Article {
   id: string;
   number: string;
@@ -69,6 +77,9 @@ export interface Article {
   price: number;
   routing: RoutingStep[];
   bom: BomLine[];
+  model?: PartModel; // parametrisk 3D-modell, driver även genererad ritning
+  stlData?: string; // uppladdad STL som data-URL (ersätter parametrisk modell i 3D-vyn)
+  drawingFiles?: DrawingFile[]; // uppladdade ritningsbilder
 }
 
 // ---------- Transaktionsdata ----------
